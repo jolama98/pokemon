@@ -1,5 +1,4 @@
 namespace pokemon.Services;
-
 public class AccountService
 {
   private readonly AccountsRepository _repo;

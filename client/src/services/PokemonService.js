@@ -1,11 +1,11 @@
 import { logger } from "@/utils/Logger.js";
-import { pokeApi } from "./AxiosService.js";
+import { api } from "./AxiosService.js";
 
 class PokemonService {
 
   async getAllPokemon() {
-    const response = await pokeApi.get('pokemon')
-    logger.log(response.data)
+    const response = await api.get('api/poke')
+    logger.log('THIS IS POKEMON!!', response.data)
   }
 }
 

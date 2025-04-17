@@ -1,5 +1,4 @@
 namespace pokemon.Models;
-
 public class Account
 {
   public string Id { get; set; }

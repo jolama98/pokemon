@@ -8,9 +8,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="card ">
-    <div class="pokemon-card mb-3 pb-3 ">
-      <h2 class="pokemon-name">{{ props.pokeProps?.name }}</h2>
+  <div class="card text-center">
+    <div class="pokemon-card mb-3 pb-3">
+      <h2 class="pokemon-name align-self-center">{{ props.pokeProps?.name }}</h2>
     </div>
   </div>
 </template>

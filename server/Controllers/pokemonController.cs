@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 [ApiController]
 [Route("api/[controller]")]
-public class pokeController : ControllerBase
+public class pokemonController : ControllerBase
 {
 
     private string baseUrl = "https://pokeapi.co/api/v2/pokemon";

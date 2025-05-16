@@ -5,6 +5,11 @@ import { api } from "./AxiosService.js";
 
 
 class PokemonService {
+  async getPokemonById(url) {
+    // AppState.pokemonById = null
+    const response = await api.get(url)
+    logger.log(response.data)
+  }
 
   async getAllPokemon() {
     const response = await api.get('api/pokemon')
@@ -13,15 +18,4 @@ class PokemonService {
     AppState.pokemon = poke
   }
 }
-
-// export async function getPokemon(name) {
-//   try {
-//     const response = await axios.get(`${BASE_URL}/pokemon/${name.toLowerCase()}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching Pokémon:', error);
-//     throw error;
-//   }
-// }
-
 export const pokemonService = new PokemonService()

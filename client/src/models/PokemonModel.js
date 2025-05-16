@@ -10,22 +10,7 @@ export class Pokemon {
     this.defense = data.defense
     this.attack = data.attack
     this.speed = data.speed
-
+    this.url = data.url
   }
 
 }
-
-// name - String
-// nickName - String
-// img - String
-// backImg - String
-// weight - String
-// height - String
-// health - Number
-// defense - Number
-// attack - Number
-// speed - Number
-// types - object Array[
-//   Object { } ]
-// creatorId - String(SchemaObjectId)
-// id - String(SchemaObjectId)

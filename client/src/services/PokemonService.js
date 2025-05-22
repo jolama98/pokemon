@@ -6,9 +6,10 @@ import { api } from "./AxiosService.js";
 
 class PokemonService {
   async getPokemonById(url) {
-    // AppState.pokemonById = null
+    AppState.pokemonById = null
     const response = await api.get(url)
     logger.log(response.data)
+    AppState.pokemonById = response.data
   }
 
   async getAllPokemon() {

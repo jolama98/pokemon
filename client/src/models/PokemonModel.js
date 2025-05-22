@@ -14,3 +14,13 @@ export class Pokemon {
   }
 
 }
+// name - String
+// nickName - String
+// img - String
+// backImg - String
+// weight - String
+// height - String
+// health - Number
+// defense - Number
+// attack - Number
+// speed - Number

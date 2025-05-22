@@ -17,6 +17,7 @@
       "scminput": false
     },
     "peacock.affectPanelBorder": true,
-    "peacock.affectStatusAndTitleBorders": true
+    "peacock.affectStatusAndTitleBorders": true,
+    "editor.cursorStyle": "line"
   }
 }

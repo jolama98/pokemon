@@ -69,7 +69,7 @@ async function loadMore() {
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <div class="border border-danger rounded-3 border-2 bg-light p-">
+        <div class=" scroll-box border border-danger rounded-3 border-2 bg-light p-">
           <div v-for="poke in pokes" :key="poke.id">
             <PokemonName :pokeProps="poke" />
           </div>
@@ -161,6 +161,14 @@ async function loadMore() {
 <style scoped lang="scss">
 .img {
   height: 250px;
+}
 
+.scroll-box {
+  height: 80vh;
+  /* or any fixed height */
+  overflow-y: auto;
+  /* scrolls vertically when needed */
+  border: 1px solid #ccc;
+  padding: 1rem;
 }
 </style>

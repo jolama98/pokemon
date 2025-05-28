@@ -5,14 +5,41 @@ import PokemonName from '@/components/PokemonName.vue';
 
 import { pokemonService } from '@/services/PokemonService.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const pokes = computed(() => AppState.pokemon)
 const activePoke = computed(() => AppState.pokemonById)
 
 
+const loadTrigger = ref(null)
+let observer = null
+
+function setupObserver() {
+  observer = new IntersectionObserver(async (entries) => {
+    const entry = entries[0]
+    if (entry.isIntersecting) {
+      await loadMore()
+    }
+  }, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0
+  })
+
+  if (loadTrigger.value) {
+    observer.observe(loadTrigger.value)
+  }
+}
+
 onMounted(() => {
   getAllPokemon()
+  setupObserver()
+})
+
+onUnmounted(() => {
+  if (observer && loadTrigger.value) {
+    observer.unobserve(loadTrigger.value)
+  }
 })
 
 async function getAllPokemon() {
@@ -23,8 +50,18 @@ async function getAllPokemon() {
     Pop.error(error);
   }
 }
-</script>
+async function loadMore() {
+  try {
+    if (AppState.nextPageUrl) {
+      await pokemonService.changePage(AppState.nextPageUrl)
+    }
+  } catch (error) {
+    Pop.error(error)
+  }
+}
 
+
+</script>
 <template>
   <div class="text-center">
     <h1>Here You Go!</h1>
@@ -36,6 +73,10 @@ async function getAllPokemon() {
           <div v-for="poke in pokes" :key="poke.id">
             <PokemonName :pokeProps="poke" />
           </div>
+          <div ref="loadTrigger" class="text-center py-2">
+            <p>Loading more Pokémon...</p>
+          </div>
+
         </div>
       </div>
       <div class="col-md-6">

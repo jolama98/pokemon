@@ -1,9 +1,9 @@
 <script setup>
 import { Pokemon } from '@/models/PokemonModel.js';
 
-const props = defineProps({
-  pokeProps: { type: Pokemon, required: true }
-})
+// const props = defineProps({
+//   pokeProps: { type: Pokemon, required: true }
+// })
 
 </script>
 
@@ -14,8 +14,7 @@ const props = defineProps({
     <div class="row">
       <div class="col-12">
         <div class="d-flex justify-content-between p-1 mb-1 border rounded-4 border-4 border-success">
-          <p>{{ pokeProps.name }}</p>
-          <p>{{ pokeProps.name }}</p>
+
         </div>
       </div>
     </div>
@@ -24,7 +23,7 @@ const props = defineProps({
       <div class="col-12">
         <div class="pb-1">
 
-          <img class="img-fluid" :src="pokeProps.img" alt="">
+
         </div>
       </div>
     </div>

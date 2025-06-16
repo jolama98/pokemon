@@ -11,6 +11,7 @@ export const AppState = reactive({
   pokemon: [],
   pokemonById: null,
   nextPageUrl: null,
-  previousPageUrl: null
+  previousPageUrl: null,
+  myPokemon: []
 })
 

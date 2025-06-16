@@ -1,6 +1,5 @@
 <script setup>
 import { AppState } from '@/AppState.js';
-// import PokemonCard from '@/components/PokemonCard.vue';
 import PokemonName from '@/components/PokemonName.vue';
 
 import { pokemonService } from '@/services/PokemonService.js';
@@ -13,6 +12,11 @@ const activePoke = computed(() => AppState.pokemonById)
 
 const loadTrigger = ref(null)
 let observer = null
+
+onMounted(() => {
+  getAllPokemon()
+  setupObserver()
+})
 
 function setupObserver() {
   observer = new IntersectionObserver(async (entries) => {
@@ -31,10 +35,6 @@ function setupObserver() {
   }
 }
 
-onMounted(() => {
-  getAllPokemon()
-  setupObserver()
-})
 
 onUnmounted(() => {
   if (observer && loadTrigger.value) {
@@ -52,12 +52,22 @@ async function getAllPokemon() {
 }
 async function loadMore() {
   try {
-    if (AppState.nextPageUrl) {
+    if (AppState?.nextPageUrl) {
       await pokemonService.changePage(AppState.nextPageUrl)
     }
   } catch (error) {
     Pop.error(error)
   }
+}
+
+async function catchEm(pokemon) {
+  try {
+    await pokemonService.catchEm(pokemon)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+
 }
 
 
@@ -94,8 +104,9 @@ async function loadMore() {
 
           <div class="row">
             <div class="col-12">
-              <div class="pb-1">
-                <img class="img-fluid" :src="activePoke?.img" alt="">
+              <div class="pb-1 d-flex justify-content-center">
+                <img class="img-fluid pokImg" :src="activePoke?.sprites?.
+                  front_default" alt="">
               </div>
             </div>
           </div>
@@ -138,20 +149,16 @@ async function loadMore() {
           </div>
           <div class="row">
             <div class="col-12">
-              <div class="d-flex justify-content-center">
-                <p>Catch em!</p>
+              <div class="pt-2 d-flex justify-content-center">
+                <button @click="catchEm()" class="text-bg-success rounded-3 border-3 bg-light p-1">Catch
+                  em!</button>
               </div>
             </div>
           </div>
-
-
-          <!-- <div v-for="activePoke in pokes" :key="activePoke.id">
-            <PokemonCard :pokeProps="activePoke" />
-          </div> -->
         </div>
       </div>
       <div class="col-md-3">
-        <div class="border border-danger rounded-3 border-2 bg-light p-3">
+        <div class="scroll-box border border-danger rounded-3 border-2 bg-light p-3">
         </div>
       </div>
     </div>
@@ -159,8 +166,8 @@ async function loadMore() {
 </template>
 
 <style scoped lang="scss">
-.img {
-  height: 250px;
+.pokImg {
+  height: 20dvh;
 }
 
 .scroll-box {

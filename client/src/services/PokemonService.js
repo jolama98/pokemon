@@ -5,10 +5,15 @@ import { api } from "./AxiosService.js";
 
 
 class PokemonService {
-  async getPokemonById(url) {
-    // AppState.pokemonById = null
+  async catchEm(url) {
     const response = await api.get(url)
-    logger.log(response.data)
+    AppState.myPokemon = response.data
+    logger.log(AppState.myPokemon)
+  }
+  async getPokemonById(url) {
+    AppState.pokemonById = null
+    const response = await api.get(url)
+    logger.log(response.data.count)
     AppState.pokemonById = response.data
     AppState.nextPageUrl = response.data.next
     AppState.previousPageUrl = response.data.previous

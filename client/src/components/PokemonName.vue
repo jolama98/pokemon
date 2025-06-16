@@ -21,7 +21,7 @@ function setActivePokemon(url) {
 <template>
   <div class="card text-center mb-1 border-0">
 
-    <h2 @click="setActivePokemon(pokeProps.url)" class="pokemon-name align-self-center">{{ props.pokeProps?.name }}
+    <h2 @click="setActivePokemon(pokeProps?.url)" class="pokemon-name align-self-center">{{ props.pokeProps?.name }}
     </h2>
   </div>
 

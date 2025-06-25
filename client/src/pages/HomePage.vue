@@ -1,5 +1,8 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import Mypokmons from '@/components/Mypokmons.vue';
+import PokemonCard from '@/components/PokemonCard.vue';
+
 import PokemonName from '@/components/PokemonName.vue';
 
 import { pokemonService } from '@/services/PokemonService.js';
@@ -60,15 +63,7 @@ async function loadMore() {
   }
 }
 
-async function catchEm(pokemon) {
-  try {
-    await pokemonService.catchEm(pokemon)
-  }
-  catch (error) {
-    Pop.error(error);
-  }
 
-}
 
 
 </script>
@@ -90,79 +85,19 @@ async function catchEm(pokemon) {
         </div>
       </div>
       <div class="col-md-6">
-        <div class="border border-danger rounded-3 border-2 bg-light p-3">
+        <div v-if="activePoke">
+          <PokemonCard :pokeProps="activePoke" />
 
-
-          <div class="row">
-            <div class="col-12">
-              <div class="d-flex justify-content-between p-1 mb-1 border rounded-4 border-4 border-success">
-                <p>{{ activePoke?.name }}</p>
-                <p>No. {{ activePoke?.id }}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="pb-1 d-flex justify-content-center">
-                <img class="img-fluid pokImg" :src="activePoke?.sprites?.
-                  front_default" alt="">
-              </div>
-            </div>
-          </div>
-
-          <div class="border rounded-2 border-4 border-success p-1">
-            <div class="row">
-              <div class="col-12">
-                <div class="d-flex justify-content-start ">
-                  <div class="m-1">
-                    grass
-                  </div>
-                  <div class="m-1">
-                    poison
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div>
-                      Health: ................... {{ activePoke?.height }} hp
-                    </div>
-                    <div>
-                      Attack: ................... {{ activePoke?.attack }} ap
-                    </div>
-                    <div>
-                      Defense: ................... {{ activePoke?.defense }} dp
-                    </div>
-                    <div>
-                      Speed: ................... {{ activePoke?.speed }} spd
-                    </div>
-                    <div>
-                      Weight: ................... {{ activePoke?.weight }} hg
-                    </div>
-                    <div>
-                      Height: ................... {{ activePoke?.height }} dm
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="pt-2 d-flex justify-content-center">
-                <button @click="catchEm()" class="text-bg-success rounded-3 border-3 bg-light p-1">Catch
-                  em!</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="scroll-box border border-danger rounded-3 border-2 bg-light p-3">
         </div>
       </div>
     </div>
+    <div class="col-md-3">
+      <Mypokmons />
+      <!-- <div class="scroll-box border border-danger rounded-3 border-2 bg-light p-3">
+      </div> -->
+    </div>
   </div>
+
 </template>
 
 <style scoped lang="scss">
